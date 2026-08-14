@@ -89,11 +89,6 @@ export const Footer: React.FC<FooterProps> = ({ onScrollTo, onOpenModal, onCopyE
                     HIPAA Compliance
                   </button>
                 </li>
-                <li>
-                  <button onClick={() => onScrollTo('pricing')} className="hover:text-white transition-colors cursor-pointer">
-                    Enterprise Plans
-                  </button>
-                </li>
               </ul>
             </div>
 

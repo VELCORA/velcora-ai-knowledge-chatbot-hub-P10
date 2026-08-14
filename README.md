@@ -24,7 +24,7 @@ Velcora AI is a customer-intelligence platform that turns your documents into a 
 - **Architecture view** — the 4-tier ingestion → embedding → retrieval → generation pipeline.
 - **ROI Calculator** — model deflection savings vs. headcount.
 - **Security matrix** — zero-retention, encryption, and compliance posture.
-- **Pricing & Contact** — plan picker that opens provisioning.
+- **Contact** — get in touch and we'll get you live, 100% free.
 
 ## Tech
 

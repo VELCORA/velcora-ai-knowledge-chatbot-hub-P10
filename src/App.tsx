@@ -14,7 +14,6 @@ import { ConversationHubSection } from './components/ConversationHubSection';
 import { ArchitectureSection } from './components/ArchitectureSection';
 import { RoiCalculatorSection } from './components/RoiCalculatorSection';
 import { SecuritySection } from './components/SecuritySection';
-import { PricingSection } from './components/PricingSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ChatbotModal } from './components/ChatbotModal';
@@ -56,11 +55,6 @@ export default function App() {
         behavior: 'smooth'
       });
     }
-  }, []);
-
-  const handleSelectPricingPlan = useCallback((planName: string) => {
-    setToastMessage(`Selected ${planName} plan. Opening contact & provisioning.`);
-    setActiveModal('contact');
   }, []);
 
   // Global ESC key listener for instantaneous modal closing
@@ -120,12 +114,7 @@ export default function App() {
       {/* 8. Security & Zero-Retention Compliance Matrix */}
       <SecuritySection />
 
-      {/* 9. Interactive Pricing Plans */}
-      <PricingSection
-        onSelectPlan={handleSelectPricingPlan}
-      />
-
-      {/* 10. Multi-Intent Contact & Careers Gateway */}
+      {/* 9. Multi-Intent Contact & Careers Gateway */}
       <ContactSection
         onCopyEmail={handleCopyEmail}
       />

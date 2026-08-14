@@ -84,10 +84,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, onScrollTo }) => {
           </button>
           <span className="select-none mx-1.5 text-zinc-400">, </span>
           <button
-            onClick={() => handleNavClick('pricing')}
+            onClick={() => handleNavClick('contact', 'contact')}
             className="cursor-pointer hover:opacity-60 transition-opacity bg-transparent border-none p-0 text-inherit focus:outline-none"
           >
-            Pricing
+            Get in touch
           </button>
         </div>
 
@@ -175,12 +175,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, onScrollTo }) => {
           className="text-[26px] font-medium text-black text-left hover:opacity-60 transition-opacity bg-transparent border-none p-0"
         >
           ROI Calculator
-        </button>
-        <button
-          onClick={() => handleNavClick('pricing')}
-          className="text-[26px] font-medium text-black text-left hover:opacity-60 transition-opacity bg-transparent border-none p-0"
-        >
-          Pricing Plans
         </button>
         <button
           onClick={() => handleNavClick('contact')}

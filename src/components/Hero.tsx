@@ -188,7 +188,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal, onCopyEmail, onScrollTo
           <span>•</span>
           <button onClick={() => onScrollTo('calculator')} className="hover:underline cursor-pointer">ROI Model</button>
           <span>•</span>
-          <button onClick={() => onScrollTo('pricing')} className="hover:underline cursor-pointer">Pricing</button>
+          <button onClick={() => onScrollTo('contact')} className="hover:underline cursor-pointer">Get in touch</button>
         </div>
       </div>
 

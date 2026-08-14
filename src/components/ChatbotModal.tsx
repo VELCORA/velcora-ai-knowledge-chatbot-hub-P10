@@ -25,7 +25,7 @@ const PROMPT_SUGGESTIONS = [
   "How does Velcora sync with enterprise knowledge bases?",
   "What are the automated conversation routing SLAs?",
   "How does the AI handle human agent handoff?",
-  "Compare Starter vs Enterprise dedicated VPC pricing"
+  "How do I get Velcora AI set up for free?"
 ];
 
 export const ChatbotModal: React.FC<ChatbotModalProps> = ({ isOpen, onClose }) => {

@@ -129,86 +129,10 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({
             </div>
           </div>
 
-          {/* Pricing Tier Grid */}
-          <div>
-            <h4 className="text-sm font-mono uppercase tracking-wider text-zinc-400 mb-4">Transparent Deployment Plans</h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              
-              {/* Starter */}
-              <div className="bg-white p-6 rounded-xl border border-zinc-200 flex flex-col justify-between">
-                <div>
-                  <h5 className="text-base font-bold text-black font-heading">Starter</h5>
-                  <div className="mt-2 flex items-baseline gap-1">
-                    <span className="text-2xl font-bold font-mono">$299</span>
-                    <span className="text-xs text-zinc-400">/month</span>
-                  </div>
-                  <p className="text-xs text-zinc-500 mt-2">Ideal for agile support teams scaling AI chat.</p>
-                  <ul className="mt-4 space-y-2 text-xs text-zinc-700">
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> Up to 5,000 conversations/mo</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> 3 Knowledge Repositories</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> Standard Webhook Bridges</li>
-                  </ul>
-                </div>
-                <button
-                  onClick={onOpenContact}
-                  className="mt-6 w-full py-2 bg-zinc-100 hover:bg-black hover:text-white text-black text-xs font-semibold rounded-lg transition-colors cursor-pointer"
-                >
-                  Choose Starter
-                </button>
-              </div>
-
-              {/* Growth - Highlighted */}
-              <div className="bg-white p-6 rounded-xl border-2 border-black relative flex flex-col justify-between shadow-md">
-                <span className="absolute -top-2.5 right-4 bg-black text-white text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full">
-                  Most Popular
-                </span>
-                <div>
-                  <h5 className="text-base font-bold text-black font-heading">Growth</h5>
-                  <div className="mt-2 flex items-baseline gap-1">
-                    <span className="text-2xl font-bold font-mono">$899</span>
-                    <span className="text-xs text-zinc-400">/month</span>
-                  </div>
-                  <p className="text-xs text-zinc-500 mt-2">For high-velocity omnichannel support operations.</p>
-                  <ul className="mt-4 space-y-2 text-xs text-zinc-700">
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> 25,000 conversations/mo</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> Unlimited Vector Repositories</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> Omnichannel Slack & WhatsApp</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> Custom Sentiment Triggers</li>
-                  </ul>
-                </div>
-                <button
-                  onClick={onOpenContact}
-                  className="mt-6 w-full py-2 bg-black hover:bg-zinc-800 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer shadow-sm"
-                >
-                  Deploy Growth
-                </button>
-              </div>
-
-              {/* Enterprise */}
-              <div className="bg-white p-6 rounded-xl border border-zinc-200 flex flex-col justify-between">
-                <div>
-                  <h5 className="text-base font-bold text-black font-heading">Enterprise</h5>
-                  <div className="mt-2 flex items-baseline gap-1">
-                    <span className="text-2xl font-bold font-mono">$2,499+</span>
-                    <span className="text-xs text-zinc-400">/month</span>
-                  </div>
-                  <p className="text-xs text-zinc-500 mt-2">Dedicated single-tenant infrastructure.</p>
-                  <ul className="mt-4 space-y-2 text-xs text-zinc-700">
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> Dedicated VPC Inference</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> Zero Data Retention SLA</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> Custom LLM Fine-Tuning</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 size={14} className="text-emerald-600" /> 24/7 Dedicated Solutions Eng.</li>
-                  </ul>
-                </div>
-                <button
-                  onClick={onOpenContact}
-                  className="mt-6 w-full py-2 bg-zinc-100 hover:bg-black hover:text-white text-black text-xs font-semibold rounded-lg transition-colors cursor-pointer"
-                >
-                  Contact Enterprise
-                </button>
-              </div>
-
-            </div>
+          <div className="rounded-xl border border-zinc-200 bg-white p-6">
+            <h4 className="text-sm font-mono uppercase tracking-wider text-zinc-400 mb-2">Pricing</h4>
+            <p className="text-base font-bold text-black font-heading">100% Free</p>
+            <p className="text-xs text-zinc-500 mt-2">Velcora AI is completely free to use. Hit <span className="font-semibold text-black">Get in touch</span> and we'll get you live in minutes.</p>
           </div>
 
         </div>
