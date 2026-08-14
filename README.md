@@ -42,20 +42,26 @@ npm run dev
 
 Runs at http://localhost:3000.
 
-## Deploy (Railway / Render / Fly)
+## Deploy (Vercel)
 
-This is a persistent Node server (it calls `app.listen`), so it needs a long-lived host — **not** Vercel serverless.
+This project is **Vercel-ready**. The frontend is a static Vite SPA, and the API is exposed as Vercel serverless functions under `api/` (`/api/chat`, `/api/knowledge-query`, `/api/conversation-triage`, `/api/health`) — so there is no long-lived Express server to host.
 
+**Via the Vercel dashboard (recommended):**
+1. Import the GitHub repo `VELCORA/velcora-ai-knowledge-chatbot-hub`.
+2. Framework preset: **Vite** (auto-detected). Build command `npm run build`, output `dist` (set in `vercel.json`).
+3. Add env var: `GEMINI_API_KEY`.
+4. Deploy. The frontend and `/api/*` functions go live together.
+
+**Via CLI:**
 ```bash
-npm run build
+npm i -g vercel
+vercel env add GEMINI_API_KEY
+vercel --prod
 ```
 
-Set environment variables on the host:
-- `GEMINI_API_KEY` — your Gemini key
-- `NODE_ENV=production` — serves the built `dist/` (without this it loads dev middleware)
-- `PORT` is injected automatically by the host
+Health check: `GET /api/health` → `{ "status": "ok", ... }`.
 
-Start command: `node dist/server.cjs`. Health check: `GET /api/health`.
+> Local dev still uses the full Express server: `npm run dev` (Vite middleware) or `npm run build && npm start` (serves `dist/`).
 
 ## Status
 
