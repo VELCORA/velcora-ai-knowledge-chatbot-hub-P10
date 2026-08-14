@@ -1,0 +1,6 @@
+{
+  "name": "Velcora AI",
+  "description": "Unified Knowledge Base, Autonomous Chatbot, and Omnichannel Conversation Management Platform with interactive 3D motion interface.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
