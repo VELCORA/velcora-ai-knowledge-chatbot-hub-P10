@@ -1,13 +1,14 @@
-import { handleChat } from "../src/server/handlers";
+import { handleChat, sendJson, readBody } from "../src/server/handlers";
 
 export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed" });
+    sendJson(res, { error: "Method not allowed" }, 405);
     return;
   }
   try {
+    req.body = await readBody(req);
     await handleChat(req, res);
   } catch (e: any) {
-    res.status(500).json({ error: e?.message || "Internal error" });
+    sendJson(res, { error: e?.message || "Internal error" }, 500);
   }
 }

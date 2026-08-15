@@ -1,5 +1,25 @@
 import type { GoogleGenAI } from "@google/genai";
 
+// Framework-agnostic JSON response (works on Vercel raw Node res AND Express res)
+export function sendJson(res: any, payload: any, status = 200): void {
+  res.statusCode = status;
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(payload));
+}
+
+// Defensive body parser: handles Vercel pre-parsed req.body OR raw stream
+export async function readBody(req: any): Promise<any> {
+  if (req.body !== undefined && req.body !== null) return req.body;
+  return await new Promise((resolve) => {
+    let data = "";
+    req.on("data", (chunk: any) => (data += chunk));
+    req.on("end", () => {
+      try { resolve(data ? JSON.parse(data) : {}); } catch { resolve({}); }
+    });
+    req.on("error", () => resolve({}));
+  });
+}
+
 let aiClient: GoogleGenAI | null = null;
 async function getGeminiClient(): Promise<GoogleGenAI | null> {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -52,7 +72,7 @@ function generateSynthesizedResponse(prompt: string): string {
 }
 
 export async function handleHealth(_req: any, res: any) {
-  res.json({ status: "ok", service: "Velcora AI Engine", time: new Date().toISOString() });
+  sendJson(res, { status: "ok", service: "Velcora AI Engine", time: new Date().toISOString() });
 }
 
 // Chat endpoint with Gemini & Intelligent Fallback
@@ -68,7 +88,7 @@ export async function handleChat(req: any, res: any) {
        Provide helpful, concise, well-structured answers with clear formatting.`;
 
     if (!ai) {
-      return res.json({
+      return sendJson(res, {
         text: generateSynthesizedResponse(userPrompt),
         model: "velcora-inference-engine",
         status: "success",
@@ -86,14 +106,14 @@ export async function handleChat(req: any, res: any) {
       contents: fullPrompt,
     });
 
-    return res.json({
+    return sendJson(res, {
       text: response.text || generateSynthesizedResponse(userPrompt),
       model: "gemini-3.6-flash",
       status: "success",
     });
   } catch (error: any) {
     console.warn("Primary LLM unavailable, using synthesized enterprise fallback:", error.message || error);
-    return res.json({
+    return sendJson(res, {
       text: generateSynthesizedResponse(userPrompt),
       model: "velcora-edge-synthesizer",
       status: "success",
@@ -109,7 +129,7 @@ export async function handleKnowledgeQuery(req: any, res: any) {
     const ai = await getGeminiClient();
 
     if (!ai) {
-      return res.json({
+      return sendJson(res, {
         answer: generateSynthesizedResponse(query || "knowledge"),
         sources: [
           { title: "Velcora Core Protocols v4", score: 0.99, id: "doc-1" },
@@ -135,7 +155,7 @@ ${docContext}`;
       contents: prompt,
     });
 
-    return res.json({
+    return sendJson(res, {
       answer: response.text || generateSynthesizedResponse(query || "knowledge"),
       sources: [
         { title: "Velcora Core Protocols v4", score: 0.98, id: "doc-kb1" },
@@ -144,7 +164,7 @@ ${docContext}`;
     });
   } catch (error: any) {
     console.warn("Knowledge query error, returning fallback:", error);
-    return res.json({
+    return sendJson(res, {
       answer: generateSynthesizedResponse(query || "knowledge"),
       sources: [
         { title: "Velcora Core Protocols v4", score: 0.98, id: "doc-kb1" },
@@ -161,7 +181,7 @@ export async function handleTriage(req: any, res: any) {
     const ai = await getGeminiClient();
 
     if (!ai) {
-      return res.json({
+      return sendJson(res, {
         sentiment: "positive",
         sentimentScore: 0.88,
         intent: "Technical Inquiry / Feature Request",
@@ -191,9 +211,9 @@ Return a JSON object with:
     });
 
     const parsed = JSON.parse(response.text?.trim() || "{}");
-    return res.json(parsed);
+    return sendJson(res, parsed);
   } catch (error: any) {
-    return res.json({
+    return sendJson(res, {
       sentiment: "neutral",
       sentimentScore: 0.75,
       intent: "Operational Inquiry",
