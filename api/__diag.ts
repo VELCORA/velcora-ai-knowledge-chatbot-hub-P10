@@ -3,16 +3,16 @@ export default async function handler(req: any, res: any) {
     node: typeof process !== "undefined" ? process.version : "n/a",
     resType: typeof res,
     resCtor: res ? (Object.getPrototypeOf(res)?.constructor?.name || "unknown") : "undefined",
-    resFns: res ? Object.getOwnPropertyNames(res).filter((k: string) => typeof (res as any)[k] === "function").slice(0, 50) : [],
+    resFns: res ? Object.getOwnPropertyNames(res).filter((k: string) => typeof (res as any)[k] === "function").slice(0, 60) : [],
     reqType: typeof req,
-    reqMethod: req && typeof req.method === "string" ? req.method : typeof (req && req.method),
+    reqCtor: typeof Request !== "undefined" && req instanceof Request ? "Request" : (req ? Object.getPrototypeOf(req)?.constructor?.name : "undefined"),
   };
-  const body = JSON.stringify(info, null, 2);
+  const json = JSON.stringify(info, null, 2);
   if (res && typeof res.end === "function") {
     res.statusCode = 200;
     if (typeof res.setHeader === "function") res.setHeader("Content-Type", "application/json");
-    res.end(body);
+    res.end(json);
     return;
   }
-  return new Response(body, { status: 200, headers: { "Content-Type": "application/json" } });
+  return new Response(json, { status: 200, headers: { "Content-Type": "application/json" } });
 }
