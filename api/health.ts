@@ -1,4 +1,4 @@
-import { handleHealth, sendJson } from "./_lib";
+import { handleHealth, sendJson } from "./_shared/lib";
 
 export default async function handler(req: any, res: any) {
   try {

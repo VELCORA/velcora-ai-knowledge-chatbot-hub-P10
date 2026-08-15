@@ -1,4 +1,4 @@
-import { handleChat, sendJson, readBody } from "./_lib";
+import { handleChat, sendJson, readBody } from "./_shared/lib";
 
 export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {
