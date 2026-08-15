@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MessageSquare, CheckCircle, Send, Sparkles, Zap, Clock, User, Check, RefreshCw } from 'lucide-react';
 import { MascotIcon } from './MascotIcon';
 import { ConversationTicket } from '../types';
+import { postJson } from '../lib/apiClient';
 
 const INITIAL_TICKETS: ConversationTicket[] = [
   {
@@ -107,19 +108,14 @@ export const ConversationHubSection: React.FC = () => {
   const handleGenerateSmartReply = async () => {
     setIsGeneratingReply(true);
     try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [
-            {
-              role: 'user',
-              content: `Generate a polite, hyper-concise professional customer response for this ticket inquiry: "${selectedTicket.lastMessage}" (Customer: ${selectedTicket.customerName}, Channel: ${selectedTicket.channel}, Urgency: ${selectedTicket.urgency}).`,
-            }
-          ],
-        }),
+      const data = await postJson('/api/chat', {
+        messages: [
+          {
+            role: 'user',
+            content: `Generate a polite, hyper-concise professional customer response for this ticket inquiry: "${selectedTicket.lastMessage}" (Customer: ${selectedTicket.customerName}, Channel: ${selectedTicket.channel}, Urgency: ${selectedTicket.urgency}).`,
+          }
+        ],
       });
-      const data = await res.json();
       setReplyText(data.text || `Hi ${selectedTicket.customerName.split(' ')[0]}, we have verified your request against our knowledge repository and updated your cluster.`);
     } catch {
       setReplyText(`Hi ${selectedTicket.customerName.split(' ')[0]}, thank you for reaching out. We have analyzed your ticket (${selectedTicket.id}) and applied the verified resolution from our knowledge repository. Please let us know if you need any additional assistance.`);

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MascotIcon } from './MascotIcon';
 import { ChatMessage } from '../types';
+import { postJson } from '../lib/apiClient';
 import { Send, Bot, Sparkles, X, RefreshCw, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
 
 interface ChatbotModalProps {
@@ -59,16 +60,10 @@ export const ChatbotModal: React.FC<ChatbotModalProps> = ({ isOpen, onClose }) =
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [...messages, userMsg].map((m) => ({ role: m.role, content: m.content })),
-          context: `Velcora AI is an enterprise Knowledge Base + Chatbot + Conversation Management platform. Mode: ${agentMode}`,
-        }),
+      const data = await postJson('/api/chat', {
+        messages: [...messages, userMsg].map((m) => ({ role: m.role, content: m.content })),
+        context: `Velcora AI is an enterprise Knowledge Base + Chatbot + Conversation Management platform. Mode: ${agentMode}`,
       });
-
-      const data = await response.json();
 
       const botMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),

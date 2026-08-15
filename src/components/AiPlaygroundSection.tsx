@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, Sparkles, RefreshCw, Bot, User, Check, Copy, Sliders, Cpu, Activity, Zap } from 'lucide-react';
 import { MascotIcon } from './MascotIcon';
 import { ChatMessage } from '../types';
+import { postJson } from '../lib/apiClient';
 
 const PRESET_PROMPTS = [
   {
@@ -68,19 +69,13 @@ export const AiPlaygroundSection: React.FC = () => {
     const startTime = performance.now();
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
-          systemPrompt: `You are Velcora AI, an enterprise autonomous agent (Temperature: ${temperature}, Confidence Gate: ${confidenceGate}, Model: ${selectedModel}). Provide hyper-concise, accurate, well-formatted answers.`
-        })
+      const data = await postJson('/api/chat', {
+        messages: [...messages, userMessage].map((m) => ({
+          role: m.role,
+          content: m.content,
+        })),
+        systemPrompt: `You are Velcora AI, an enterprise autonomous agent (Temperature: ${temperature}, Confidence Gate: ${confidenceGate}, Model: ${selectedModel}). Provide hyper-concise, accurate, well-formatted answers.`
       });
-
-      const data = await response.json();
       const endTime = performance.now();
       setLatency(Math.round(endTime - startTime) || 240);
 

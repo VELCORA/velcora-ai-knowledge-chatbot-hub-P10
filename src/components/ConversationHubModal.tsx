@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ConversationTicket } from '../types';
 import { MessageSquare, CheckCircle, AlertTriangle, Clock, User, Bot, Send, Sparkles, X, Filter, Zap, ArrowUpRight } from 'lucide-react';
 import { MascotIcon } from './MascotIcon';
+import { postJson } from '../lib/apiClient';
 
 interface ConversationHubModalProps {
   isOpen: boolean;
@@ -114,19 +115,14 @@ export const ConversationHubModal: React.FC<ConversationHubModalProps> = ({ isOp
   const handleGenerateSmartReply = async () => {
     setIsGeneratingReply(true);
     try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: [
-            {
-              role: 'user',
-              content: `Generate a polite, hyper-concise professional customer response for this ticket inquiry: "${selectedTicket.lastMessage}" (Urgency: ${selectedTicket.urgency}, Sentiment: ${selectedTicket.sentiment}).`,
-            }
-          ],
-        }),
+      const data = await postJson('/api/chat', {
+        messages: [
+          {
+            role: 'user',
+            content: `Generate a polite, hyper-concise professional customer response for this ticket inquiry: "${selectedTicket.lastMessage}" (Urgency: ${selectedTicket.urgency}, Sentiment: ${selectedTicket.sentiment}).`,
+          }
+        ],
       });
-      const data = await res.json();
       setReplyText(data.text || "Hello! We have reviewed your request and expedited it through our priority gateway.");
     } catch {
       setReplyText(`Hi ${selectedTicket.customerName.split(' ')[0]}, thank you for reaching out. We have analyzed your ticket (${selectedTicket.id}) and applied the verified resolution from our knowledge repository. Please let us know if you need any additional assistance.`);

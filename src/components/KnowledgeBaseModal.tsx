@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { KnowledgeDocument } from '../types';
 import { Search, BookOpen, FileText, Plus, X, Layers, Check, ExternalLink, Sparkles, Database, ArrowRight } from 'lucide-react';
 import { MascotIcon } from './MascotIcon';
+import { postJson } from '../lib/apiClient';
 
 interface KnowledgeBaseModalProps {
   isOpen: boolean;
@@ -115,15 +116,10 @@ export const KnowledgeBaseModal: React.FC<KnowledgeBaseModalProps> = ({ isOpen, 
     setSynthesizing(true);
     setAiSummary(null);
     try {
-      const res = await fetch('/api/knowledge-query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: `Summarize key rules and actions for document: ${selectedDoc.title}`,
-          documents: [selectedDoc],
-        }),
+      const data = await postJson('/api/knowledge-query', {
+        query: `Summarize key rules and actions for document: ${selectedDoc.title}`,
+        documents: [selectedDoc],
       });
-      const data = await res.json();
       setAiSummary(data.answer || "Extracted 3 primary enforcement protocols and high confidence response rules.");
     } catch (e) {
       setAiSummary(`**Synthesized Insights for ${selectedDoc.title}**\n\n• **Core Objective**: Standardizes platform SLA & automated response parameters.\n• **Vector Health**: Fully indexed and live across all connected conversational channels.`);

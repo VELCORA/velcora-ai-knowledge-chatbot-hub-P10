@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Database, Search, Plus, Sparkles, FileText, Check, Layers, ExternalLink, ArrowUpRight } from 'lucide-react';
 import { KnowledgeDocument } from '../types';
+import { postJson } from '../lib/apiClient';
 
 const INITIAL_DOCS: KnowledgeDocument[] = [
   {
@@ -107,15 +108,10 @@ export const KnowledgeSection: React.FC = () => {
     setSynthesizing(true);
     setAiSummary(null);
     try {
-      const res = await fetch('/api/knowledge-query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: `Summarize key rules and actions for document: ${selectedDoc.title}`,
-          documents: [selectedDoc],
-        }),
+      const data = await postJson('/api/knowledge-query', {
+        query: `Summarize key rules and actions for document: ${selectedDoc.title}`,
+        documents: [selectedDoc],
       });
-      const data = await res.json();
       setAiSummary(data.answer || "Extracted 3 primary enforcement protocols and high confidence response rules.");
     } catch {
       setAiSummary(`**Synthesized Insights for ${selectedDoc.title}**\n\n• **Core Objective**: Standardizes platform SLA & automated response parameters.\n• **Vector Health**: Fully indexed and live across all connected conversational channels.`);
