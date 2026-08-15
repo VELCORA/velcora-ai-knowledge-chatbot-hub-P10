@@ -86,7 +86,7 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({
                 <span className="text-[10px] font-mono text-zinc-400 uppercase">Layer 03</span>
                 <h5 className="text-sm font-bold text-black font-heading mt-0.5">LLM Routing Gate</h5>
                 <p className="text-xs text-zinc-500 mt-2 leading-relaxed">
-                  Multi-agent orchestration with Gemini 3.7 Flash generating grounded citations and tool execution.
+                  Multi-agent orchestration with Gemini 3.6 Flash generating grounded citations and tool execution.
                 </p>
               </div>
 

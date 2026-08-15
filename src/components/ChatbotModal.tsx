@@ -121,7 +121,7 @@ export const ChatbotModal: React.FC<ChatbotModalProps> = ({ isOpen, onClose }) =
                 <h3 className="text-lg font-heading font-semibold text-black">Velcora Autonomous Agent</h3>
                 <span className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Live Gemini 3.7
+                  Live Gemini 3.6
                 </span>
               </div>
               <p className="text-xs text-zinc-500 font-body">Knowledge-grounded conversational intelligence</p>
@@ -277,7 +277,7 @@ export const ChatbotModal: React.FC<ChatbotModalProps> = ({ isOpen, onClose }) =
             </button>
           </div>
           <div className="flex items-center justify-between text-[11px] text-zinc-400 mt-2 px-2">
-            <span>Powered by Velcora Neural Knowledge Engine & Gemini 3.7</span>
+            <span>Powered by Velcora Neural Knowledge Engine & Gemini 3.6</span>
             <span className="hidden sm:inline">Press Return to send</span>
           </div>
         </div>

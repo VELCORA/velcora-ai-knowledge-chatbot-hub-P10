@@ -30,7 +30,7 @@ Velcora AI is a customer-intelligence platform that turns your documents into a 
 
 - Vite + React 19 + TypeScript + Tailwind CSS v4
 - Express backend (`server.ts`) with `/api/chat`, `/api/knowledge-query`, `/api/conversation-triage`
-- Google Gemini (`gemini-3.7-flash`, current GA) via `@google/genai`
+- Google Gemini (`gemini-3.6-flash`, current GA) via `@google/genai`
 
 ## Quick start (local)
 

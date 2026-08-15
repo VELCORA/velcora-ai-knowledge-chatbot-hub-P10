@@ -1,13 +1,14 @@
-import { GoogleGenAI } from "@google/genai";
+import type { GoogleGenAI } from "@google/genai";
 
 let aiClient: GoogleGenAI | null = null;
-function getGeminiClient(): GoogleGenAI | null {
+async function getGeminiClient(): Promise<GoogleGenAI | null> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return null;
   }
   if (!aiClient) {
-    aiClient = new GoogleGenAI({
+    const mod = await import("@google/genai");
+    aiClient = new mod.GoogleGenAI({
       apiKey,
       httpOptions: {
         headers: {
@@ -39,7 +40,7 @@ function generateSynthesizedResponse(prompt: string): string {
     return `**Velcora SLA & Autonomous Routing Protocol**\n\n1. **Execution Path**: Webhook latency is benchmarked at < 200ms across all regional edge nodes.\n2. **Deflection SLA**: Incoming requests exceeding 500ms are automatically re-routed to hot replica clusters.\n3. **Automated Escalation**: Any 504 Gateway error triggers a circuit breaker and creates an incident alert in Tier 3 on-call queue.\n\n*Verified against Production Knowledge Vector KB-804.*`;
   }
   if (lower.includes("price") || lower.includes("cost") || lower.includes("plan") || lower.includes("roi")) {
-    return `**Velcora AI Pricing & Financial Model**\n\n• **Starter ($299/mo)**: 5,000 monthly conversations, sub-500ms SLA, Slack & Webchat.\n• **Growth ($899/mo)**: 25,000 monthly conversations, sub-240ms Gemini 3.7 engine, WhatsApp, Email & Slack.\n• **Enterprise ($2,499+/mo)**: Unlimited volume, dedicated VPC peering, signed HIPAA BAA & 99.99% uptime guarantee.\n\n*Typical payback period is under 6 business days with 84.6% deflection.*`;
+    return `**Velcora AI Pricing & Financial Model**\n\n• **Starter ($299/mo)**: 5,000 monthly conversations, sub-500ms SLA, Slack & Webchat.\n• **Growth ($899/mo)**: 25,000 monthly conversations, sub-240ms Gemini 3.6 engine, WhatsApp, Email & Slack.\n• **Enterprise ($2,499+/mo)**: Unlimited volume, dedicated VPC peering, signed HIPAA BAA & 99.99% uptime guarantee.\n\n*Typical payback period is under 6 business days with 84.6% deflection.*`;
   }
   if (lower.includes("security") || lower.includes("soc2") || lower.includes("retention") || lower.includes("hipaa")) {
     return `**Velcora Zero-Retention Security Architecture**\n\n• **SOC2 Type II**: Continuous automated audits across all trust principles.\n• **Zero-Retention Mode**: Customer conversation payloads are processed in ephemeral RAM and never stored at rest.\n• **Encryption**: 256-bit AES encryption at rest and TLS 1.3 in flight.\n• **VPC Peering**: Direct private peering with AWS and GCP VPCs.`;
@@ -60,7 +61,7 @@ export async function handleChat(req: any, res: any) {
   const userPrompt = messages && messages.length > 0 ? messages[messages.length - 1].content : "Hello";
 
   try {
-    const ai = getGeminiClient();
+    const ai = await getGeminiClient();
 
     const baseSystem = systemPrompt ||
       `You are Velcora AI, an ultra-fast, intelligent enterprise assistant designed for customer support, internal knowledge retrieval, and omnichannel conversation triage.
@@ -81,13 +82,13 @@ export async function handleChat(req: any, res: any) {
     const fullPrompt = `${baseSystem}\n\n${context ? `[Knowledge Base Context]:\n${context}\n\n` : ""}${historyText ? `[Conversation History]:\n${historyText}\n\n` : ""}[User]: ${userPrompt}\n[Assistant]:`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.7-flash",
+      model: "gemini-3.6-flash",
       contents: fullPrompt,
     });
 
     return res.json({
       text: response.text || generateSynthesizedResponse(userPrompt),
-      model: "gemini-3.7-flash",
+      model: "gemini-3.6-flash",
       status: "success",
     });
   } catch (error: any) {
@@ -105,7 +106,7 @@ export async function handleKnowledgeQuery(req: any, res: any) {
   const { query, documents } = parseBody(req);
 
   try {
-    const ai = getGeminiClient();
+    const ai = await getGeminiClient();
 
     if (!ai) {
       return res.json({
@@ -130,7 +131,7 @@ Knowledge Context:
 ${docContext}`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.7-flash",
+      model: "gemini-3.6-flash",
       contents: prompt,
     });
 
@@ -157,7 +158,7 @@ ${docContext}`;
 export async function handleTriage(req: any, res: any) {
   try {
     const { conversation } = parseBody(req);
-    const ai = getGeminiClient();
+    const ai = await getGeminiClient();
 
     if (!ai) {
       return res.json({
@@ -182,7 +183,7 @@ Return a JSON object with:
 - summary: 1-sentence summary`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.7-flash",
+      model: "gemini-3.6-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",

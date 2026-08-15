@@ -40,7 +40,7 @@ export const AiPlaygroundSection: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [temperature, setTemperature] = useState(0.2);
   const [confidenceGate, setConfidenceGate] = useState(0.92);
-  const [selectedModel, setSelectedModel] = useState<'gemini-3.7-flash' | 'claude-3-5-sonnet' | 'gpt-4o'>('gemini-3.7-flash');
+  const [selectedModel, setSelectedModel] = useState<'gemini-3.6-flash' | 'claude-3-5-sonnet' | 'gpt-4o'>('gemini-3.6-flash');
   const [latency, setLatency] = useState<number>(240);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
@@ -185,7 +185,7 @@ export const AiPlaygroundSection: React.FC = () => {
                 <label className="block text-xs font-medium text-zinc-300 mb-2">Neural Backbone</label>
                 <div className="space-y-1.5">
                   {[
-                    { id: 'gemini-3.7-flash', name: 'Gemini 3.7 Flash', desc: 'Default • Sub-240ms reasoning' },
+                     { id: 'gemini-3.6-flash', name: 'Gemini 3.6 Flash', desc: 'Default • Sub-240ms reasoning' },
                     { id: 'claude-3-5-sonnet', name: 'Claude 3.5 Sonnet Route', desc: 'Complex policy arbitration' },
                     { id: 'gpt-4o', name: 'GPT-4o Enterprise Gateway', desc: 'Omnichannel fallback bridge' },
                   ].map((m) => (

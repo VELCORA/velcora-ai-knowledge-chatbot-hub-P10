@@ -57,7 +57,7 @@ export const ProductOverview: React.FC<ProductOverviewProps> = ({ onScrollTo, on
               </div>
               <h3 className="text-lg font-heading font-bold text-black mb-2">Autonomous AI Agents</h3>
               <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
-                Context-aware multimodal LLM orchestration powered by Gemini 3.7 with dynamic confidence thresholding and instant smart responses.
+                Context-aware multimodal LLM orchestration powered by Gemini 3.6 with dynamic confidence thresholding and instant smart responses.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-zinc-200/60 flex items-center justify-between text-xs font-semibold text-black">

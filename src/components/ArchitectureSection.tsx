@@ -42,11 +42,11 @@ POST /api/v1/events/inbound
     id: 3,
     title: 'Tier 3: LLM Reasoning Gate & Policy Enforcement',
     shortName: 'LLM Reasoning Gate',
-    badge: 'Gemini 3.7 Flash Engine',
+    badge: 'Gemini 3.6 Flash Engine',
     desc: 'Evaluates context against enterprise security rules and confidence thresholds. Validates whether autonomous dispatch is permitted.',
     payload: `// Autonomous Gate Validation
 {
-  "model": "gemini-3.7-flash",
+  "model": "gemini-3.6-flash",
   "temperature": 0.2,
   "confidence_score": 0.98,
   "threshold_required": 0.92,
