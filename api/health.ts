@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 async function normalize(req: any): Promise<{ method: string; body: any }> {
   if (typeof Request !== "undefined" && req instanceof Request) {
     let body: any = {};

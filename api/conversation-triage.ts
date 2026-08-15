@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 const MODEL = "gemini-3.6-flash";
 
 async function normalize(req: any): Promise<{ method: string; body: any }> {
