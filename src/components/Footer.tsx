@@ -96,14 +96,19 @@ export const Footer: React.FC<FooterProps> = ({ onScrollTo, onOpenModal, onCopyE
               <span className="font-mono text-zinc-400 uppercase tracking-wider text-[11px] block">Direct Contact</span>
               <ul className="space-y-2 text-zinc-300">
                 <li>
-                  <button onClick={() => onCopyEmail('hello@velcora.ai')} className="hover:text-white transition-colors cursor-pointer">
-                    hello@velcora.ai
+                  <button onClick={() => onCopyEmail('velcora.ai@gmail.com')} className="hover:text-white transition-colors cursor-pointer">
+                    velcora.ai@gmail.com
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => onCopyEmail('careers@velcora.ai')} className="hover:text-white transition-colors cursor-pointer">
-                    careers@velcora.ai
+                  <button onClick={() => onCopyEmail('velcora.ai@gmail.com')} className="hover:text-white transition-colors cursor-pointer">
+                    velcora.ai@gmail.com
                   </button>
+                </li>
+                <li>
+                  <a href="tel:+919138278584" className="hover:text-white transition-colors cursor-pointer flex items-center gap-2">
+                    +919138278584
+                  </a>
                 </li>
                 <li>
                   <button onClick={() => onScrollTo('contact')} className="hover:text-white transition-colors cursor-pointer">

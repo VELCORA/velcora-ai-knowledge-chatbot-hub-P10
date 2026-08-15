@@ -32,7 +32,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal, onCopyEmail, onScrollTo
   const handleCopyClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const email = "hello@velcora.ai";
+    const email = "velcora.ai@gmail.com";
     navigator.clipboard.writeText(email).then(() => {
       setCopied(true);
       onCopyEmail(email);
@@ -126,7 +126,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal, onCopyEmail, onScrollTo
             See how we operate
           </button>
 
-          {/* 1 Outline Pill Button: Reach us: hello@velcora.ai */}
+          {/* 1 Outline Pill Button: Reach us: velcora.ai@gmail.com */}
           <button
             onClick={handleCopyClick}
             title="Click to copy email address"
@@ -135,7 +135,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenModal, onCopyEmail, onScrollTo
             <span>
               {copied ? "Copied to clipboard!" : (
                 <>
-                  Reach us: <span className="underline underline-offset-1">hello@velcora.ai</span>
+                  Reach us: <span className="underline underline-offset-1">velcora.ai@gmail.com</span>
                 </>
               )}
             </span>

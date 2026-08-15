@@ -143,10 +143,10 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, onC
                   <span>Direct: </span>
                   <button
                     type="button"
-                    onClick={() => onCopyEmail('hello@velcora.ai')}
+                    onClick={() => onCopyEmail('velcora.ai@gmail.com')}
                     className="text-black font-semibold underline underline-offset-2 hover:opacity-75 cursor-pointer"
                   >
-                    hello@velcora.ai
+                    velcora.ai@gmail.com
                   </button>
                 </div>
 

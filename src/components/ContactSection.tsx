@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Check, Copy, Send, Sparkles, Briefcase, Lightbulb, MessageSquare } from 'lucide-react';
+import { Mail, Check, Copy, Send, Sparkles, Briefcase, Lightbulb, MessageSquare, Phone } from 'lucide-react';
 
 interface ContactSectionProps {
   onCopyEmail: (email: string) => void;
@@ -55,20 +55,27 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
 
           <div className="flex flex-wrap items-center gap-2">
             <button
-              onClick={() => handleCopy('hello@velcora.ai')}
+              onClick={() => handleCopy('velcora.ai@gmail.com')}
               className="px-4 py-2 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-mono text-zinc-300 hover:text-white transition-colors cursor-pointer flex items-center gap-2"
             >
-              {copiedEmail === 'hello@velcora.ai' ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
-              <span>hello@velcora.ai</span>
+              {copiedEmail === 'velcora.ai@gmail.com' ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+              <span>velcora.ai@gmail.com</span>
             </button>
             <button
-              onClick={() => handleCopy('careers@velcora.ai')}
+              onClick={() => handleCopy('velcora.ai@gmail.com')}
               className="px-4 py-2 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-mono text-zinc-300 hover:text-white transition-colors cursor-pointer flex items-center gap-2"
             >
-              {copiedEmail === 'careers@velcora.ai' ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
-              <span>careers@velcora.ai</span>
-            </button>
-          </div>
+              {copiedEmail === 'velcora.ai@gmail.com' ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+              <span>velcora.ai@gmail.com</span>
+              </button>
+              <a
+                href="tel:+919138278584"
+                className="px-4 py-2 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-mono text-zinc-300 hover:text-white transition-colors flex items-center gap-2"
+              >
+                <Phone size={13} />
+                <span>+919138278584</span>
+              </a>
+            </div>
         </div>
 
         {/* Multi-Intent Contact Box */}
